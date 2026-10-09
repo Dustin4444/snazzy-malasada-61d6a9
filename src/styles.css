@@ -1,0 +1,70 @@
+@import "tailwindcss" source("../");
+
+@theme {
+  --color-paper: #f3efe6;
+  --color-paper-deep: #e9e3d6;
+  --color-ink: #16140f;
+  --color-ink-soft: #4a463d;
+  --color-rule: #cfc7b6;
+  --color-signal: #e2432a;
+  --color-signal-deep: #b8321d;
+
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-paper);
+}
+
+/* Fine paper grain so the background never reads as flat beige */
+.grain {
+  background-image: radial-gradient(rgba(22, 20, 15, 0.06) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.fill {
+  transform-origin: left;
+  animation: fill 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .fill { animation: none; }
+  html { scroll-behavior: auto; }
+}
